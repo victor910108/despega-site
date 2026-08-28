@@ -1,0 +1,30 @@
+# Sitio estatico de despegacredito.com en Render.
+#
+# Existe porque GitHub Pages se quedo atascado emitiendo el certificado HTTPS
+# (mas de 18 horas con el DNS correcto), y Plaid exige la politica de
+# privacidad por https. Render emite el certificado solo, en minutos.
+#
+# En Render: New > Blueprint > este repositorio. Despues, en Porkbun, apuntar
+# el dominio a lo que Render indique (un CNAME para www y un A para la raiz).
+
+services:
+  - type: web
+    name: despega-site
+    runtime: static
+    staticPublishPath: .
+    domains:
+      - despegacredito.com
+      - www.despegacredito.com
+    routes:
+      # Las URL publicas no llevan .html: /privacy y /terms son las que estan
+      # en la politica, en la app y en la solicitud de Plaid.
+      - type: rewrite
+        source: /privacy
+        destination: /privacy.html
+      - type: rewrite
+        source: /terms
+        destination: /terms.html
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
