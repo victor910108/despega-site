@@ -15,7 +15,13 @@
   header .wrap { display:flex; align-items:center; gap:12px; height:60px; }
   .logo { width:32px; height:32px; border-radius:9px; background:linear-gradient(135deg,#ff9a5c,#ff6b54); display:grid; place-items:center; color:#fff; font-weight:800; }
   header a { color:var(--ink); text-decoration:none; font-weight:700; }
-  nav a { margin-left:16px; font-weight:500; color:var(--muted); }
+  nav { margin-left:auto; display:flex; align-items:center; gap:16px; }
+  nav a { font-weight:500; color:var(--muted); }
+  /* Selector de idioma: la portada es en español, pero quien revisa la app
+     (Plaid, Google, Apple) suele leer en inglés y no debería tener que adivinar. */
+  .lang { display:flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; }
+  .lang button { border:0; background:transparent; color:var(--muted); font:inherit; font-size:13px; font-weight:700; padding:5px 10px; cursor:pointer; }
+  .lang button[aria-pressed="true"] { background:var(--ink); color:#fff; }
   main { padding:64px 0 80px; }
   .hero { display:grid; gap:18px; }
   .mark { width:88px; height:88px; border-radius:24px; background:linear-gradient(135deg,#ff9a5c,#ff6b54); display:grid; place-items:center; }
@@ -36,7 +42,14 @@
 <body>
 <header><div class="wrap">
   <a href="/" style="display:flex;align-items:center;gap:10px"><span class="logo">D</span>Despega</a>
-  <nav style="margin-left:auto"><a href="/privacy">Privacidad</a><a href="/terms">Términos</a></nav>
+  <nav>
+    <a href="/privacy" data-i18n="nav.privacy">Privacidad</a>
+    <a href="/terms" data-i18n="nav.terms">Términos</a>
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </nav>
 </div></header>
 
 <main><div class="wrap">
@@ -47,21 +60,92 @@
         <path d="M26 14 L 34 14 L 34 22"/>
       </svg>
     </div>
-    <span class="pill">Pronto en iOS y Android</span>
-    <h1>Sube tu crédito.<br>Despega.</h1>
-    <p class="lead">Todas tus tarjetas en un solo lugar, avisos antes de cada pago, tu salud crediticia clara y un plan para salir de deudas. En español, hecho para ti.</p>
+    <span class="pill" data-i18n="pill">Pronto en iOS y Android</span>
+    <h1 data-i18n="h1">Sube tu crédito.<br>Despega.</h1>
+    <p class="lead" data-i18n="lead">Todas tus tarjetas en un solo lugar, avisos antes de cada pago, tu salud crediticia clara y un plan para salir de deudas. En español, hecho para ti.</p>
   </div>
 
   <div class="grid">
-    <div class="card"><h3>Tus tarjetas, juntas</h3><p>Conecta tus bancos de forma segura a través de Plaid y ve saldos, límites y fechas de pago en una sola pantalla.</p></div>
-    <div class="card"><h3>Nunca pagues tarde</h3><p>Avisos días antes de cada vencimiento, con el importe y un acceso directo a tu banco para pagar.</p></div>
-    <div class="card"><h3>Salud crediticia clara</h3><p>Tu utilización de crédito y la tendencia de tu deuda explicadas sin jerga, con consejos que puedes aplicar hoy.</p></div>
-    <div class="card"><h3>Un plan para salir de deudas</h3><p>Dinos cuánto puedes pagar al mes y te decimos en qué orden atacar tus tarjetas y cuándo estarás libre.</p></div>
+    <div class="card"><h3 data-i18n="c1.h">Tus tarjetas, juntas</h3><p data-i18n="c1.p">Conecta tus bancos de forma segura a través de Plaid y ve saldos, límites y fechas de pago en una sola pantalla.</p></div>
+    <div class="card"><h3 data-i18n="c2.h">Nunca pagues tarde</h3><p data-i18n="c2.p">Avisos días antes de cada vencimiento, con el importe y un acceso directo a tu banco para pagar.</p></div>
+    <div class="card"><h3 data-i18n="c3.h">Salud crediticia clara</h3><p data-i18n="c3.p">Tu utilización de crédito y la tendencia de tu deuda explicadas sin jerga, con consejos que puedes aplicar hoy.</p></div>
+    <div class="card"><h3 data-i18n="c4.h">Un plan para salir de deudas</h3><p data-i18n="c4.p">Dinos cuánto puedes pagar al mes y te decimos en qué orden atacar tus tarjetas y cuándo estarás libre.</p></div>
   </div>
 
-  <p class="contact">¿Preguntas? Escríbenos a <a href="mailto:support@despegacredito.com">support@despegacredito.com</a>.</p>
+  <p class="contact"><span data-i18n="contact">¿Preguntas? Escríbenos a</span> <a href="mailto:support@despegacredito.com">support@despegacredito.com</a>.</p>
 </div></main>
 
 <footer><div class="wrap">© 2026 VMMV Partners LLC, doing business as Despega · <a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></div></footer>
+
+<script>
+(function () {
+  // Textos de la portada en los dos idiomas. Los legales (/privacy, /terms)
+  // están en inglés: es lo que leen los revisores y lo que exige Plaid.
+  var T = {
+    es: {
+      'nav.privacy': 'Privacidad',
+      'nav.terms': 'Términos',
+      'pill': 'Pronto en iOS y Android',
+      'h1': 'Sube tu crédito.<br>Despega.',
+      'lead': 'Todas tus tarjetas en un solo lugar, avisos antes de cada pago, tu salud crediticia clara y un plan para salir de deudas. En español, hecho para ti.',
+      'c1.h': 'Tus tarjetas, juntas',
+      'c1.p': 'Conecta tus bancos de forma segura a través de Plaid y ve saldos, límites y fechas de pago en una sola pantalla.',
+      'c2.h': 'Nunca pagues tarde',
+      'c2.p': 'Avisos días antes de cada vencimiento, con el importe y un acceso directo a tu banco para pagar.',
+      'c3.h': 'Salud crediticia clara',
+      'c3.p': 'Tu utilización de crédito y la tendencia de tu deuda explicadas sin jerga, con consejos que puedes aplicar hoy.',
+      'c4.h': 'Un plan para salir de deudas',
+      'c4.p': 'Dinos cuánto puedes pagar al mes y te decimos en qué orden atacar tus tarjetas y cuándo estarás libre.',
+      'contact': '¿Preguntas? Escríbenos a',
+      'title': 'Despega — Sube tu crédito'
+    },
+    en: {
+      'nav.privacy': 'Privacy',
+      'nav.terms': 'Terms',
+      'pill': 'Coming soon to iOS and Android',
+      'h1': 'Raise your credit.<br>Take off.',
+      'lead': 'All your cards in one place, reminders before every payment, your credit health made clear, and a plan to get out of debt. Built in Spanish, for you.',
+      'c1.h': 'Your cards, together',
+      'c1.p': 'Securely connect your banks through Plaid and see balances, limits and due dates on one screen.',
+      'c2.h': 'Never pay late',
+      'c2.p': 'Reminders days before each due date, with the amount and a shortcut to your bank to pay.',
+      'c3.h': 'Credit health, made clear',
+      'c3.p': 'Your credit utilization and debt trend explained without jargon, with tips you can act on today.',
+      'c4.h': 'A plan to get out of debt',
+      'c4.p': 'Tell us how much you can pay each month and we tell you which cards to attack first and when you will be free.',
+      'contact': 'Questions? Write to us at',
+      'title': 'Despega — Raise your credit'
+    }
+  };
+
+  function apply(lang) {
+    var t = T[lang] || T.es;
+    document.documentElement.lang = lang;
+    document.title = t.title;
+    var nodes = document.querySelectorAll('[data-i18n]');
+    for (var i = 0; i < nodes.length; i++) {
+      var key = nodes[i].getAttribute('data-i18n');
+      if (t[key] != null) nodes[i].innerHTML = t[key];
+    }
+    var buttons = document.querySelectorAll('[data-lang]');
+    for (var j = 0; j < buttons.length; j++) {
+      buttons[j].setAttribute('aria-pressed', buttons[j].getAttribute('data-lang') === lang ? 'true' : 'false');
+    }
+    try { localStorage.setItem('lang', lang); } catch (e) {}
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  // Sin elección previa: español, que es a quien va dirigida la app. Quien
+  // llega con el navegador en inglés lo ve en inglés directamente.
+  var initial = saved || ((navigator.language || '').toLowerCase().indexOf('en') === 0 ? 'en' : 'es');
+  apply(initial);
+
+  var btns = document.querySelectorAll('[data-lang]');
+  for (var k = 0; k < btns.length; k++) {
+    btns[k].addEventListener('click', function () { apply(this.getAttribute('data-lang')); });
+  }
+})();
+</script>
 </body>
 </html>
