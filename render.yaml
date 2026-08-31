@@ -24,6 +24,10 @@ services:
       - type: rewrite
         source: /terms
         destination: /terms.html
+      # Pagina de borrado de cuenta que exige Google Play (Data safety).
+      - type: rewrite
+        source: /delete-account
+        destination: /delete-account.html
     headers:
       - path: /*
         name: X-Frame-Options
