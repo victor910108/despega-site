@@ -4,44 +4,134 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Despega — Sube tu crédito</title>
-<meta name="description" content="Despega te ayuda a ver tus tarjetas en un solo lugar, no perderte ningún pago y salir de deudas. Pronto en iOS y Android.">
+<meta name="description" content="Despega te ayuda a ver tus tarjetas en un solo lugar, no perderte ningún pago y salir de deudas. Beta en Android, pronto en iOS.">
 <link rel="canonical" href="https://despegacredito.com/">
+<link rel="icon" type="image/png" href="favicon-48.png">
+<link rel="apple-touch-icon" href="icono-192.png">
 <style>
-  :root { --ink:#1a1a1a; --muted:#595959; --accent:#ff6b54; --bg:#fff; --line:#e6e6e6; }
+  /* Paleta calcada del tema oscuro de la app (hierba.ts + marca):
+     la web se ve como la app que vas a instalar. */
+  :root {
+    --bg:#0b0d10; --card:#171a1f; --card-alt:#1f242b; --line:#2a2f37;
+    --ink:#f4f5f7; --muted:#9aa3af; --accent:#ff6b54;
+    --ok:#17b26a; --warn:#ffb23e; --bad:#dc2626;
+  }
   * { box-sizing:border-box; }
   body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
-  .wrap { max-width:760px; margin:0 auto; padding:0 20px; }
-  header { border-bottom:1px solid var(--line); }
+  .wrap { max-width:960px; margin:0 auto; padding:0 20px; }
+  header { border-bottom:1px solid var(--line); position:sticky; top:0; background:rgba(11,13,16,.92); backdrop-filter:blur(8px); z-index:20; }
   header .wrap { display:flex; align-items:center; gap:12px; height:60px; }
-  .logo { width:32px; height:32px; border-radius:9px; background:linear-gradient(135deg,#ff9a5c,#ff6b54); display:grid; place-items:center; color:#fff; font-weight:800; }
+  .logo { width:32px; height:32px; display:block; border-radius:8px; }
   header a { color:var(--ink); text-decoration:none; font-weight:700; }
   nav { margin-left:auto; display:flex; align-items:center; gap:16px; }
   nav a { font-weight:500; color:var(--muted); }
+  nav a:hover { color:var(--ink); }
   /* Selector de idioma: la portada es en español, pero quien revisa la app
      (Plaid, Google, Apple) suele leer en inglés y no debería tener que adivinar. */
   .lang { display:flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; }
   .lang button { border:0; background:transparent; color:var(--muted); font:inherit; font-size:13px; font-weight:700; padding:5px 10px; cursor:pointer; }
-  .lang button[aria-pressed="true"] { background:var(--ink); color:#fff; }
-  main { padding:64px 0 80px; }
-  .hero { display:grid; gap:18px; }
-  .mark { width:88px; height:88px; border-radius:24px; background:linear-gradient(135deg,#ff9a5c,#ff6b54); display:grid; place-items:center; }
-  .mark svg { width:48px; height:48px; }
-  h1 { font-size:40px; line-height:1.15; margin:0; letter-spacing:-0.5px; }
+  .lang button[aria-pressed="true"] { background:var(--accent); color:#fff; }
+
+  main { padding:72px 0 0; }
+  .hero { display:grid; gap:18px; justify-items:start; text-align:left; max-width:640px; }
+  .mark { width:88px; height:88px; display:block; border-radius:20px; box-shadow:0 10px 30px rgba(255,107,84,.25); }
+  h1 { font-size:clamp(36px,6vw,52px); line-height:1.1; margin:0; letter-spacing:-1px; }
   .lead { font-size:19px; color:var(--muted); margin:0; max-width:560px; }
-  .pill { display:inline-block; padding:6px 12px; border-radius:999px; background:#fff3ef; color:var(--accent); font-weight:700; font-size:13px; width:max-content; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-top:48px; }
-  .card { border:1px solid var(--line); border-radius:14px; padding:18px; }
-  .card h3 { margin:0 0 6px; font-size:16px; }
-  .card p { margin:0; color:var(--muted); font-size:15px; }
-  .contact { margin-top:48px; color:var(--muted); }
-  .contact a { color:#2447d6; }
+  .pill { display:inline-block; padding:6px 12px; border-radius:999px; border:1.5px solid var(--accent); color:var(--accent); font-weight:700; font-size:13px; width:max-content; }
+
+  .cta { margin-top:10px; display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+  .gp { display:inline-flex; align-items:center; gap:11px; background:#000; color:#fff; text-decoration:none; border:1px solid var(--line); border-radius:11px; padding:10px 18px 10px 15px; transition:transform .15s, border-color .15s; }
+  .gp:hover { transform:translateY(-1px); border-color:#4a525d; }
+  .gp:focus-visible { outline:3px solid #ffb9ab; outline-offset:3px; }
+  .gp-ico { width:24px; height:26px; display:block; flex-shrink:0; }
+  .gp-txt { display:flex; flex-direction:column; line-height:1.12; text-align:left; }
+  .gp-txt small { font-size:10px; letter-spacing:.6px; opacity:.92; }
+  .gp-txt b { font-size:18px; font-weight:600; letter-spacing:.2px; }
+  .cta-note { margin:0; font-size:13px; color:var(--muted); max-width:460px; }
+  .cta-note a, .contact a { color:var(--accent); }
+  .trust { margin-top:26px; font-size:13.5px; color:var(--muted); }
+
+  /* ── Las 3 pantallas del inicio de la app, como secciones vivas ── */
+  .demos { display:grid; gap:26px; margin-top:64px; }
+  .demo {
+    display:grid; grid-template-columns:1fr; gap:28px; align-items:center;
+    border:1.5px solid var(--line); border-radius:24px;
+    background:var(--card); padding:36px 28px;
+  }
+  @media (min-width:840px) {
+    .demo { grid-template-columns:1fr 1fr; padding:48px 44px; }
+    .demo.flip .demo-copy { order:2; }
+    .demo.flip .demo-art { order:1; }
+  }
+  .demo-eyebrow { color:var(--accent); font-size:12px; font-weight:800; letter-spacing:1.8px; text-transform:uppercase; margin:0 0 10px; }
+  .demo h2 { font-size:clamp(24px,3.4vw,30px); margin:0 0 10px; letter-spacing:-0.4px; line-height:1.2; }
+  .demo p { margin:0; color:var(--muted); font-size:15.5px; line-height:1.65; }
+  .demo-art { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:300px; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+
+  /* 1 · abanico de tarjetas (misma cascada con rebotito que la app) */
+  .mazo { position:relative; width:310px; height:250px; max-width:100%; }
+  .tarj {
+    position:absolute; left:50%; top:26px; width:286px; height:166px; margin-left:-143px;
+    border-radius:22px; padding:17px 20px; display:flex; flex-direction:column; justify-content:space-between;
+    box-shadow:0 10px 22px rgba(0,0,0,.5); opacity:0;
+    transform:rotate(var(--rot)) translateY(calc(var(--dy) + 64px));
+  }
+  .on .tarj { animation:sube .65s cubic-bezier(.2,.9,.3,1.2) var(--wait) forwards; }
+  @keyframes sube {
+    from { opacity:0; transform:rotate(var(--rot)) translateY(calc(var(--dy) + 64px)); }
+    50%  { opacity:1; }
+    to   { opacity:1; transform:rotate(var(--rot)) translateY(var(--dy)); }
+  }
+  .tarj-fila { display:flex; justify-content:space-between; align-items:center; }
+  .tarj-nombre { color:#fff; font-size:14px; font-weight:700; }
+  .tarj-tag { color:rgba(255,255,255,.75); font-size:11px; font-weight:600; letter-spacing:.6px; }
+  .tarj-mask { color:rgba(255,255,255,.9); font-size:15px; font-weight:600; letter-spacing:3px; }
+  .tarj-monto { color:#fff; font-size:20px; font-weight:800; }
+
+  /* 2 · avisos push (el importante cae desde arriba, como un push real) */
+  .avisos { width:324px; max-width:100%; display:grid; gap:14px; }
+  .push {
+    display:flex; gap:13px; align-items:flex-start;
+    background:var(--card-alt); border:1px solid var(--line);
+    border-radius:20px; padding:15px 17px;
+  }
+  .push-ghost { opacity:.5; transform:scale(.96); }
+  .push-icon { width:44px; height:44px; border-radius:13px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:var(--accent); color:#fff; font-size:21px; font-weight:900; }
+  .push-title { color:var(--ink); font-size:15px; font-weight:700; margin:0 0 3px; }
+  .push-text { color:var(--muted); font-size:13.5px; line-height:1.4; margin:0; }
+  .push-main, .chip-demo { opacity:0; }
+  .on .push-main { animation:cae .45s cubic-bezier(.34,1.56,.64,1) .28s forwards; }
+  @keyframes cae { from { opacity:0; transform:translateY(-26px); } 60% { opacity:1; } to { opacity:1; transform:none; } }
+  .chip-demo { justify-self:center; border:1.5px solid var(--accent); color:var(--accent); border-radius:999px; padding:7px 15px; font-size:12.5px; font-weight:700; margin-top:4px; }
+  .on .chip-demo { animation:cae2 .4s cubic-bezier(.34,1.56,.64,1) .62s forwards; }
+  @keyframes cae2 { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+
+  /* 3 · el aro: baja de 100 % rojo a 28 % verde (JS mueve trazo y color) */
+  .aro-caja { position:relative; width:200px; height:200px; }
+  .aro-caja svg { display:block; transform:rotate(-90deg); }
+  .aro-centro { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .aro-pct { font-size:40px; font-weight:800; letter-spacing:-1px; font-variant-numeric:tabular-nums; }
+  .aro-label { font-size:11.5px; font-weight:700; color:var(--muted); letter-spacing:1.6px; text-transform:uppercase; margin-top:3px; }
+  .veredicto { display:flex; align-items:center; gap:8px; margin-top:18px; }
+  .veredicto-dot { width:10px; height:10px; border-radius:5px; background:var(--bad); }
+  .veredicto-txt { font-size:14.5px; font-weight:700; color:var(--bad); }
+
+  /* CTA final + contacto */
+  .cta-final { text-align:center; padding:72px 0 8px; display:grid; justify-items:center; gap:14px; }
+  .cta-final h2 { font-size:clamp(24px,3.4vw,30px); margin:0; letter-spacing:-0.4px; }
+  .contact { margin:40px 0 64px; color:var(--muted); text-align:center; }
   footer { border-top:1px solid var(--line); padding:20px 0; color:var(--muted); font-size:14px; }
   footer a { color:var(--muted); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tarj, .push-main, .chip-demo { animation:none !important; opacity:1 !important; transform:rotate(var(--rot, 0deg)) translateY(var(--dy, 0)); }
+    .demo-art { cursor:default; }
+  }
 </style>
 </head>
 <body>
 <header><div class="wrap">
-  <a href="/" style="display:flex;align-items:center;gap:10px"><span class="logo">D</span>Despega</a>
+  <a href="/" style="display:flex;align-items:center;gap:10px"><img class="logo" src="icono-192.png" alt="">Despega</a>
   <nav>
     <a href="/privacy" data-i18n="nav.privacy">Privacidad</a>
     <a href="/terms" data-i18n="nav.terms">Términos</a>
@@ -54,22 +144,127 @@
 
 <main><div class="wrap">
   <div class="hero">
-    <div class="mark" aria-hidden="true">
-      <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M8 34 C 18 34, 22 20, 32 16"/>
-        <path d="M26 14 L 34 14 L 34 22"/>
-      </svg>
-    </div>
-    <span class="pill" data-i18n="pill">Pronto en iOS y Android</span>
+    <img class="mark" src="icono-192.png" alt="" aria-hidden="true">
+    <span class="pill" data-i18n="pill">Beta en Android · pronto en iOS</span>
     <h1 data-i18n="h1">Sube tu crédito.<br>Despega.</h1>
     <p class="lead" data-i18n="lead">Todas tus tarjetas en un solo lugar, avisos antes de cada pago, tu salud crediticia clara y un plan para salir de deudas. En español, hecho para ti.</p>
+
+    <!-- Beta de Android · Prueba INTERNA (por invitación). El enlace es el opt-in
+         de Play Console (Pruebas → Prueba interna → "Cómo se unen los testers").
+         Solo abre para correos ya agregados a la lista; por eso la nota-mailto.
+         Si algún día se activa Prueba abierta, cambiar el href por:
+           https://play.google.com/apps/testing/com.despega.app -->
+    <div class="cta">
+      <a class="gp" href="https://play.google.com/apps/internaltest/4701661261017005664" target="_blank" rel="noopener" aria-label="Google Play (beta)">
+        <!-- Logo real del "arrow" de Google Play (paths oficiales) -->
+        <svg class="gp-ico" viewBox="30 336.7 120.9 129.2" aria-hidden="true">
+          <path fill="#3BCCFF" d="M99.1,401.1l-64.3-64.3c-2.6,0.6-4.8,2.9-4.8,7.6c0,7.5,0,107.5,0,113.8c0,4.3,1.7,7.4,4.9,7.7L99.1,401.1z"/>
+          <path fill="#48FF48" d="M99.1,401.1l20.1-20.2c0,0-74.6-40.7-79.1-43.1c-1.7-1-3.6-1.3-5.3-1L99.1,401.1z"/>
+          <path fill="#FF3333" d="M99.1,401.1l-64.2,64.7c1.5,0.2,3.2-0.2,5.2-1.3c4.2-2.3,48.8-26.7,79.1-43.3L99.1,401.1z"/>
+          <path fill="#FFD400" d="M119.2,421.2c15.3-8.4,27-14.8,28-15.3c3.2-1.7,6.5-6.2,0-9.7c-2.1-1.1-13.4-7.3-28-15.3l-20.1,20.2L119.2,421.2z"/>
+        </svg>
+        <span class="gp-txt"><small data-i18n="gp.small">DISPONIBLE EN</small><b>Google Play</b></span>
+      </a>
+      <p class="cta-note" data-i18n="beta.note">Beta por invitación. ¿No te deja entrar? Mándanos tu correo de Google a <a href="mailto:support@despegacredito.com?subject=Beta%20Android%20Despega">support@despegacredito.com</a> y te agregamos.</p>
+    </div>
+    <p class="trust" data-i18n="trust">Conexión bancaria segura vía Plaid · Nunca vemos tu contraseña del banco · En español y en inglés</p>
   </div>
 
-  <div class="grid">
-    <div class="card"><h3 data-i18n="c1.h">Tus tarjetas, juntas</h3><p data-i18n="c1.p">Conecta tus bancos de forma segura a través de Plaid y ve saldos, límites y fechas de pago en una sola pantalla.</p></div>
-    <div class="card"><h3 data-i18n="c2.h">Nunca pagues tarde</h3><p data-i18n="c2.p">Avisos días antes de cada vencimiento, con el importe y un acceso directo a tu banco para pagar.</p></div>
-    <div class="card"><h3 data-i18n="c3.h">Salud crediticia clara</h3><p data-i18n="c3.p">Tu utilización de crédito y la tendencia de tu deuda explicadas sin jerga, con consejos que puedes aplicar hoy.</p></div>
-    <div class="card"><h3 data-i18n="c4.h">Un plan para salir de deudas</h3><p data-i18n="c4.p">Dinos cuánto puedes pagar al mes y te decimos en qué orden atacar tus tarjetas y cuándo estarás libre.</p></div>
+  <!-- Las mismas 3 pantallas con las que la app te recibe, vivas en la web.
+       Tocar el dibujo repite su animación (igual que en la app). -->
+  <div class="demos">
+
+    <!-- ── 1 · Todas tus tarjetas, juntas ── -->
+    <section class="demo" data-demo="fan">
+      <div class="demo-copy">
+        <p class="demo-eyebrow" data-i18n="step1">Paso 1</p>
+        <h2 data-i18n="s1.h">Todas tus tarjetas, juntas</h2>
+        <p data-i18n="s1.p">Conecta tus bancos de forma segura con Plaid y ve saldos, límites y fechas de pago en una sola pantalla. Nunca vemos tu contraseña del banco.</p>
+      </div>
+      <div class="demo-art" role="button" tabindex="0" aria-label="Repetir animación">
+        <div class="mazo">
+          <div class="tarj" style="--rot:-7deg; --dy:44px; --wait:.12s; background:#8b95a1">
+            <div class="tarj-fila"><span class="tarj-nombre">Capital One</span><span class="tarj-tag">QUICKSILVER</span></div>
+            <span class="tarj-mask">•••• 9908</span>
+            <div class="tarj-fila"><span class="tarj-tag" data-i18n="d.debt">DEBES</span><span class="tarj-monto">$4,953.62</span></div>
+          </div>
+          <div class="tarj" style="--rot:4deg; --dy:16px; --wait:.26s; background:#13294b">
+            <div class="tarj-fila"><span class="tarj-nombre">Chase</span><span class="tarj-tag">SAPPHIRE</span></div>
+            <span class="tarj-mask">•••• 4421</span>
+            <div class="tarj-fila"><span class="tarj-tag" data-i18n="d.debt">DEBES</span><span class="tarj-monto">$1,210.00</span></div>
+          </div>
+          <div class="tarj" style="--rot:-1deg; --dy:-16px; --wait:.40s; background:var(--accent)">
+            <div class="tarj-fila"><span class="tarj-nombre">Despega</span><span class="tarj-tag"></span></div>
+            <span class="tarj-mask">•••• ••••</span>
+            <div class="tarj-fila"><span class="tarj-tag" data-i18n="d.brand">TUS TARJETAS</span><span class="tarj-monto" data-i18n="d.brandv">en un lugar</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 2 · Nunca pagues tarde ── -->
+    <section class="demo flip" data-demo="push">
+      <div class="demo-copy">
+        <p class="demo-eyebrow" data-i18n="step2">Paso 2</p>
+        <h2 data-i18n="s2.h">Nunca pagues tarde</h2>
+        <p data-i18n="s2.p">Avisos días antes de cada vencimiento, con el monto y un acceso directo a tu banco para pagar. Adiós a los cargos por mora.</p>
+      </div>
+      <div class="demo-art" role="button" tabindex="0" aria-label="Repetir animación">
+        <div class="avisos">
+          <div class="push push-ghost">
+            <div class="push-icon">D</div>
+            <div><p class="push-title">Despega</p><p class="push-text" data-i18n="d.ghost">Tu tarjeta ··4421 se paga el viernes.</p></div>
+          </div>
+          <div class="push push-main">
+            <div class="push-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5S10.5 3.17 10.5 4v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+            </div>
+            <div><p class="push-title" data-i18n="d.pushT">Pago en 3 días</p><p class="push-text" data-i18n="d.pushB">Tarjeta ··9908 · mínimo $163.00 · vence el 19.</p></div>
+          </div>
+          <div class="chip-demo" data-i18n="d.chip">Tú eliges con cuántos días de aviso</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 3 · Sube tu crédito ── -->
+    <section class="demo" data-demo="ring">
+      <div class="demo-copy">
+        <p class="demo-eyebrow" data-i18n="step3">Paso 3</p>
+        <h2 data-i18n="s3.h">Sube tu crédito</h2>
+        <p data-i18n="s3.p">Tu utilización explicada sin jerga y un plan para salir de deudas: dinos cuánto puedes pagar al mes y te decimos en qué orden atacar.</p>
+      </div>
+      <div class="demo-art" role="button" tabindex="0" aria-label="Repetir animación">
+        <div class="aro-caja">
+          <svg width="200" height="200" viewBox="0 0 200 200" aria-hidden="true">
+            <circle cx="100" cy="100" r="91.5" fill="none" stroke="var(--line)" stroke-width="17"/>
+            <circle id="aro" cx="100" cy="100" r="91.5" fill="none" stroke="var(--bad)" stroke-width="17"
+                    stroke-dasharray="574.9" stroke-dashoffset="0"/>
+          </svg>
+          <div class="aro-centro">
+            <span class="aro-pct" id="aro-pct">100%</span>
+            <span class="aro-label" data-i18n="d.ringL">Uso de crédito</span>
+          </div>
+        </div>
+        <div class="veredicto">
+          <span class="veredicto-dot" id="veredicto-dot"></span>
+          <span class="veredicto-txt" id="veredicto-txt">En riesgo</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CTA final: quien llegó hasta abajo ya vio qué hace la app -->
+  <div class="cta-final">
+    <h2 data-i18n="cta2.h">Pruébala hoy en Android</h2>
+    <a class="gp" href="https://play.google.com/apps/internaltest/4701661261017005664" target="_blank" rel="noopener" aria-label="Google Play (beta)">
+      <svg class="gp-ico" viewBox="30 336.7 120.9 129.2" aria-hidden="true">
+        <path fill="#3BCCFF" d="M99.1,401.1l-64.3-64.3c-2.6,0.6-4.8,2.9-4.8,7.6c0,7.5,0,107.5,0,113.8c0,4.3,1.7,7.4,4.9,7.7L99.1,401.1z"/>
+        <path fill="#48FF48" d="M99.1,401.1l20.1-20.2c0,0-74.6-40.7-79.1-43.1c-1.7-1-3.6-1.3-5.3-1L99.1,401.1z"/>
+        <path fill="#FF3333" d="M99.1,401.1l-64.2,64.7c1.5,0.2,3.2-0.2,5.2-1.3c4.2-2.3,48.8-26.7,79.1-43.3L99.1,401.1z"/>
+        <path fill="#FFD400" d="M119.2,421.2c15.3-8.4,27-14.8,28-15.3c3.2-1.7,6.5-6.2,0-9.7c-2.1-1.1-13.4-7.3-28-15.3l-20.1,20.2L119.2,421.2z"/>
+      </svg>
+      <span class="gp-txt"><small data-i18n="gp.small">DISPONIBLE EN</small><b>Google Play</b></span>
+    </a>
   </div>
 
   <p class="contact"><span data-i18n="contact">¿Preguntas? Escríbenos a</span> <a href="mailto:support@despegacredito.com">support@despegacredito.com</a>.</p>
@@ -81,44 +276,74 @@
 (function () {
   // Textos de la portada en los dos idiomas. Los legales (/privacy, /terms)
   // están en inglés: es lo que leen los revisores y lo que exige Plaid.
+  // Los pasos 1-3 usan las MISMAS frases del carrusel de bienvenida de la app.
   var T = {
     es: {
       'nav.privacy': 'Privacidad',
       'nav.terms': 'Términos',
-      'pill': 'Pronto en iOS y Android',
+      'pill': 'Beta en Android · pronto en iOS',
       'h1': 'Sube tu crédito.<br>Despega.',
       'lead': 'Todas tus tarjetas en un solo lugar, avisos antes de cada pago, tu salud crediticia clara y un plan para salir de deudas. En español, hecho para ti.',
-      'c1.h': 'Tus tarjetas, juntas',
-      'c1.p': 'Conecta tus bancos de forma segura a través de Plaid y ve saldos, límites y fechas de pago en una sola pantalla.',
-      'c2.h': 'Nunca pagues tarde',
-      'c2.p': 'Avisos días antes de cada vencimiento, con el importe y un acceso directo a tu banco para pagar.',
-      'c3.h': 'Salud crediticia clara',
-      'c3.p': 'Tu utilización de crédito y la tendencia de tu deuda explicadas sin jerga, con consejos que puedes aplicar hoy.',
-      'c4.h': 'Un plan para salir de deudas',
-      'c4.p': 'Dinos cuánto puedes pagar al mes y te decimos en qué orden atacar tus tarjetas y cuándo estarás libre.',
+      'trust': 'Conexión bancaria segura vía Plaid · Nunca vemos tu contraseña del banco · En español y en inglés',
+      'step1': 'Paso 1', 'step2': 'Paso 2', 'step3': 'Paso 3',
+      's1.h': 'Todas tus tarjetas, juntas',
+      's1.p': 'Conecta tus bancos de forma segura con Plaid y ve saldos, límites y fechas de pago en una sola pantalla. Nunca vemos tu contraseña del banco.',
+      's2.h': 'Nunca pagues tarde',
+      's2.p': 'Avisos días antes de cada vencimiento, con el monto y un acceso directo a tu banco para pagar. Adiós a los cargos por mora.',
+      's3.h': 'Sube tu crédito',
+      's3.p': 'Tu utilización explicada sin jerga y un plan para salir de deudas: dinos cuánto puedes pagar al mes y te decimos en qué orden atacar.',
+      'd.debt': 'DEBES',
+      'd.brand': 'TUS TARJETAS',
+      'd.brandv': 'en un lugar',
+      'd.ghost': 'Tu tarjeta ··4421 se paga el viernes.',
+      'd.pushT': 'Pago en 3 días',
+      'd.pushB': 'Tarjeta ··9908 · mínimo $163.00 · vence el 19.',
+      'd.chip': 'Tú eliges con cuántos días de aviso',
+      'd.ringL': 'Uso de crédito',
+      'd.risk': 'En riesgo',
+      'd.ok': 'Saludable',
+      'cta2.h': 'Pruébala hoy en Android',
       'contact': '¿Preguntas? Escríbenos a',
+      'gp.small': 'DISPONIBLE EN',
+      'beta.note': 'Beta por invitación. ¿No te deja entrar? Mándanos tu correo de Google a <a href="mailto:support@despegacredito.com?subject=Beta%20Android%20Despega">support@despegacredito.com</a> y te agregamos.',
       'title': 'Despega — Sube tu crédito'
     },
     en: {
       'nav.privacy': 'Privacy',
       'nav.terms': 'Terms',
-      'pill': 'Coming soon to iOS and Android',
+      'pill': 'Android beta · iOS coming soon',
       'h1': 'Raise your credit.<br>Take off.',
       'lead': 'All your cards in one place, reminders before every payment, your credit health made clear, and a plan to get out of debt. Built in Spanish, for you.',
-      'c1.h': 'Your cards, together',
-      'c1.p': 'Securely connect your banks through Plaid and see balances, limits and due dates on one screen.',
-      'c2.h': 'Never pay late',
-      'c2.p': 'Reminders days before each due date, with the amount and a shortcut to your bank to pay.',
-      'c3.h': 'Credit health, made clear',
-      'c3.p': 'Your credit utilization and debt trend explained without jargon, with tips you can act on today.',
-      'c4.h': 'A plan to get out of debt',
-      'c4.p': 'Tell us how much you can pay each month and we tell you which cards to attack first and when you will be free.',
+      'trust': 'Secure bank connection via Plaid · We never see your bank password · In Spanish and English',
+      'step1': 'Step 1', 'step2': 'Step 2', 'step3': 'Step 3',
+      's1.h': 'All your cards, together',
+      's1.p': 'Securely connect your banks with Plaid and see balances, limits, and due dates on one screen. We never see your bank password.',
+      's2.h': 'Never pay late',
+      's2.p': 'Alerts days before every due date, with the amount and a shortcut to your bank to pay. Goodbye late fees.',
+      's3.h': 'Build your credit',
+      's3.p': 'Your utilization explained without jargon and a plan to get out of debt: tell us how much you can pay per month and we tell you what to attack first.',
+      'd.debt': 'YOU OWE',
+      'd.brand': 'YOUR CARDS',
+      'd.brandv': 'in one place',
+      'd.ghost': 'Your card ··4421 is due on Friday.',
+      'd.pushT': 'Payment in 3 days',
+      'd.pushB': 'Card ··9908 · minimum $163.00 · due on the 19th.',
+      'd.chip': 'You choose how many days ahead',
+      'd.ringL': 'Credit use',
+      'd.risk': 'At risk',
+      'd.ok': 'Healthy',
+      'cta2.h': 'Try it today on Android',
       'contact': 'Questions? Write to us at',
+      'gp.small': 'GET IT ON',
+      'beta.note': 'Invite-only beta. Can\'t get in? Send us your Google email at <a href="mailto:support@despegacredito.com?subject=Despega%20Android%20Beta">support@despegacredito.com</a> and we\'ll add you.',
       'title': 'Despega — Raise your credit'
     }
   };
 
+  var LANG = 'es';
+
   function apply(lang) {
+    LANG = lang;
     var t = T[lang] || T.es;
     document.documentElement.lang = lang;
     document.title = t.title;
@@ -131,6 +356,7 @@
     for (var j = 0; j < buttons.length; j++) {
       buttons[j].setAttribute('aria-pressed', buttons[j].getAttribute('data-lang') === lang ? 'true' : 'false');
     }
+    pintaVeredicto(); // el texto del aro vive fuera del bucle data-i18n
     try { localStorage.setItem('lang', lang); } catch (e) {}
   }
 
@@ -139,12 +365,114 @@
   // Sin elección previa: español, que es a quien va dirigida la app. Quien
   // llega con el navegador en inglés lo ve en inglés directamente.
   var initial = saved || ((navigator.language || '').toLowerCase().indexOf('en') === 0 ? 'en' : 'es');
-  apply(initial);
 
   var btns = document.querySelectorAll('[data-lang]');
   for (var k = 0; k < btns.length; k++) {
     btns[k].addEventListener('click', function () { apply(this.getAttribute('data-lang')); });
   }
+
+  /* ─── El aro del paso 3: 100 % rojo → 28 % verde ───────────────────────
+     Mismo viaje que en la app: el llenado baja con easeOutCubic en 2.1 s y
+     el color va con el tiempo lineal por el semáforo (rojo → naranja con
+     tramo propio 45-58 % → verde). El veredicto cambia pasado el 72 %. */
+  var RING_START = 100, RING_END = 28, RING_MS = 2100;
+  var C = 2 * Math.PI * 91.5; // circunferencia del trazo
+  var aro = document.getElementById('aro');
+  var aroPct = document.getElementById('aro-pct');
+  var dot = document.getElementById('veredicto-dot');
+  var txt = document.getElementById('veredicto-txt');
+  var raf = null, healthy = false;
+
+  function hexLerp(a, b, t) {
+    var pa = parseInt(a.slice(1), 16), pb = parseInt(b.slice(1), 16);
+    var r = Math.round(((pa >> 16) & 255) + (((pb >> 16) & 255) - ((pa >> 16) & 255)) * t);
+    var g = Math.round(((pa >> 8) & 255) + (((pb >> 8) & 255) - ((pa >> 8) & 255)) * t);
+    var bl = Math.round((pa & 255) + ((pb & 255) - (pa & 255)) * t);
+    return 'rgb(' + r + ',' + g + ',' + bl + ')';
+  }
+  var ROJO = '#dc2626', NARANJA = '#ffb23e', VERDE = '#17b26a';
+  function colorEn(t) { // t lineal 0..1
+    if (t < 0.45) return hexLerp(ROJO, NARANJA, t / 0.45);
+    if (t < 0.58) return NARANJA;
+    return hexLerp(NARANJA, VERDE, (t - 0.58) / 0.42);
+  }
+  function pinta(fill, color) {
+    aro.setAttribute('stroke-dashoffset', String(C * (1 - fill)));
+    aro.setAttribute('stroke', color);
+    aroPct.textContent = Math.round(fill * 100) + '%';
+    dot.style.background = color;
+    txt.style.color = healthy ? VERDE : ROJO;
+  }
+  function pintaVeredicto() {
+    var t = T[LANG] || T.es;
+    txt.textContent = healthy ? t['d.ok'] : t['d.risk'];
+    txt.style.color = healthy ? VERDE : ROJO;
+  }
+  function ringReset() {
+    if (raf) cancelAnimationFrame(raf);
+    raf = null; healthy = false;
+    pinta(1, ROJO);
+    pintaVeredicto();
+  }
+  function ringStart() {
+    ringReset();
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { // sin animación: directo al estado final saludable
+      healthy = true;
+      pinta(RING_END / 100, VERDE);
+      pintaVeredicto();
+      return;
+    }
+    var t0 = null;
+    function paso(ts) {
+      if (t0 === null) t0 = ts;
+      var t = Math.min(1, (ts - t0) / RING_MS);
+      var e = 1 - Math.pow(1 - t, 3); // easeOutCubic para el llenado
+      var fill = (RING_START + (RING_END - RING_START) * e) / 100;
+      var estabaSano = healthy;
+      healthy = t > 0.72;
+      pinta(fill, colorEn(t));
+      if (healthy !== estabaSano) pintaVeredicto();
+      if (t < 1) raf = requestAnimationFrame(paso);
+    }
+    raf = requestAnimationFrame(paso);
+  }
+
+  /* ─── Las animaciones se lanzan al entrar en pantalla y se repiten al
+     tocar el dibujo (igual que en la app) ─── */
+  function relanza(sec) {
+    sec.classList.remove('on');
+    void sec.offsetWidth; // reinicia las animaciones CSS
+    sec.classList.add('on');
+    if (sec.getAttribute('data-demo') === 'ring') ringStart();
+  }
+  var demos = document.querySelectorAll('.demo');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) relanza(en.target);
+        else {
+          en.target.classList.remove('on');
+          if (en.target.getAttribute('data-demo') === 'ring') ringReset();
+        }
+      });
+    }, { threshold: 0.45 });
+    demos.forEach(function (d) { io.observe(d); });
+  } else {
+    demos.forEach(function (d) { d.classList.add('on'); });
+    ringStart();
+  }
+  demos.forEach(function (d) {
+    var art = d.querySelector('.demo-art');
+    if (!art) return;
+    art.addEventListener('click', function () { relanza(d); });
+    art.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); relanza(d); }
+    });
+  });
+
+  apply(initial);
+  ringReset();
 })();
 </script>
 </body>
