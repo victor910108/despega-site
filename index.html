@@ -41,6 +41,13 @@
   .pill { display:inline-block; padding:6px 12px; border-radius:999px; border:1.5px solid var(--ok); color:var(--ok); font-weight:700; font-size:13px; width:max-content; }
 
   .cta { margin-top:10px; display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
+  .cta-row { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  /* Botón principal "Descarga el app": el mismo botón coral de la app. */
+  .btn-dl { display:inline-flex; align-items:center; justify-content:center; background:var(--accent); color:#fff; text-decoration:none; font-weight:700; font-size:16px; border-radius:999px; padding:13px 26px; transition:transform .15s, opacity .15s; }
+  .btn-dl:hover { transform:translateY(-1px); opacity:.92; }
+  .btn-dl:focus-visible { outline:3px solid #ffb9ab; outline-offset:3px; }
+  .nav-dl { background:var(--accent); color:#fff !important; border-radius:999px; padding:7px 14px; font-size:13.5px; font-weight:700 !important; }
+  .nav-dl:hover { opacity:.9; }
   .gp { display:inline-flex; align-items:center; gap:11px; background:#000; color:#fff; text-decoration:none; border:1px solid var(--line); border-radius:11px; padding:10px 18px 10px 15px; transition:transform .15s, border-color .15s; }
   .gp:hover { transform:translateY(-1px); border-color:#4a525d; }
   .gp:focus-visible { outline:3px solid #ffb9ab; outline-offset:3px; }
@@ -136,6 +143,7 @@
   <nav>
     <a href="/privacy" data-i18n="nav.privacy">Privacidad</a>
     <a href="/terms" data-i18n="nav.terms">Términos</a>
+    <a class="nav-dl" href="https://play.google.com/apps/internaltest/4701661261017005664" target="_blank" rel="noopener" data-i18n="nav.dl">Descargar</a>
     <div class="lang" role="group" aria-label="Idioma / Language">
       <button type="button" data-lang="es" aria-pressed="true">ES</button>
       <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -156,6 +164,8 @@
          Si algún día se activa Prueba abierta, cambiar el href por:
            https://play.google.com/apps/testing/com.despega.app -->
     <div class="cta">
+      <div class="cta-row">
+      <a class="btn-dl" href="https://play.google.com/apps/internaltest/4701661261017005664" target="_blank" rel="noopener" data-i18n="dl">Descarga el app</a>
       <a class="gp" href="https://play.google.com/apps/internaltest/4701661261017005664" target="_blank" rel="noopener" aria-label="Google Play (beta)">
         <!-- Logo real del "arrow" de Google Play (paths oficiales) -->
         <svg class="gp-ico" viewBox="30 336.7 120.9 129.2" aria-hidden="true">
@@ -166,6 +176,7 @@
         </svg>
         <span class="gp-txt"><small data-i18n="gp.small">DISPONIBLE EN</small><b>Google Play</b></span>
       </a>
+      </div>
       <p class="cta-note" data-i18n="beta.note">Beta por invitación. ¿No te deja entrar? Mándanos tu correo de Google a <a href="mailto:support@despegacredito.com?subject=Beta%20Android%20Despega">support@despegacredito.com</a> y te agregamos.</p>
     </div>
     <p class="trust" data-i18n="trust">Conexión bancaria segura vía Plaid · Nunca vemos tu contraseña del banco · En español y en inglés</p>
@@ -257,6 +268,7 @@
   <!-- CTA final: quien llegó hasta abajo ya vio qué hace la app -->
   <div class="cta-final">
     <h2 data-i18n="cta2.h">Pruébala hoy en Android</h2>
+    <a class="btn-dl" href="https://play.google.com/apps/internaltest/4701661261017005664" target="_blank" rel="noopener" data-i18n="dl">Descarga el app</a>
     <a class="gp" href="https://play.google.com/apps/internaltest/4701661261017005664" target="_blank" rel="noopener" aria-label="Google Play (beta)">
       <svg class="gp-ico" viewBox="30 336.7 120.9 129.2" aria-hidden="true">
         <path fill="#3BCCFF" d="M99.1,401.1l-64.3-64.3c-2.6,0.6-4.8,2.9-4.8,7.6c0,7.5,0,107.5,0,113.8c0,4.3,1.7,7.4,4.9,7.7L99.1,401.1z"/>
@@ -282,6 +294,8 @@
     es: {
       'nav.privacy': 'Privacidad',
       'nav.terms': 'Términos',
+      'nav.dl': 'Descargar',
+      'dl': 'Descarga el app',
       'pill': 'Beta en Android · pronto en iOS',
       'h1': 'Sube tu crédito.<br>Despega.',
       'lead': 'Todas tus tarjetas en un solo lugar, avisos antes de cada pago, tu salud crediticia clara y un plan para salir de deudas. En español, hecho para ti.',
@@ -312,6 +326,8 @@
     en: {
       'nav.privacy': 'Privacy',
       'nav.terms': 'Terms',
+      'nav.dl': 'Download',
+      'dl': 'Download the app',
       'pill': 'Android beta · iOS coming soon',
       'h1': 'Raise your credit.<br>Take off.',
       'lead': 'All your cards in one place, reminders before every payment, your credit health made clear, and a plan to get out of debt. Built in Spanish, for you.',
