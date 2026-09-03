@@ -16,8 +16,12 @@
     --ink:#f4f5f7; --muted:#9aa3af; --accent:#ff6b54;
     --ok:#17b26a; --warn:#ffb23e; --bad:#dc2626;
   }
-  * { box-sizing:border-box; }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; overflow-x:hidden; }
+  /* En táctil no hay hover: el toque da feedback de PRESIÓN (active), y los
+     efectos hover quedan solo para quien navega con mouse. */
+  a, button, .demo-art { touch-action:manipulation; -webkit-user-select:none; user-select:none; }
+  .gp:active, .btn-dl:active, .nav-dl:active { transform:scale(.97); opacity:.85; }
   .wrap { max-width:960px; margin:0 auto; padding:0 20px; }
   header { border-bottom:1px solid var(--line); position:sticky; top:0; background:rgba(11,13,16,.92); backdrop-filter:blur(8px); z-index:20; }
   header .wrap { display:flex; align-items:center; gap:12px; height:60px; }
@@ -44,12 +48,11 @@
   .cta-row { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
   /* Botón principal "Descarga el app": el mismo botón coral de la app. */
   .btn-dl { display:inline-flex; align-items:center; justify-content:center; background:var(--accent); color:#fff; text-decoration:none; font-weight:700; font-size:16px; border-radius:999px; padding:13px 26px; transition:transform .15s, opacity .15s; }
-  .btn-dl:hover { transform:translateY(-1px); opacity:.92; }
+  @media (hover:hover) { .btn-dl:hover { transform:translateY(-1px); opacity:.92; } .nav-dl:hover { opacity:.9; } }
   .btn-dl:focus-visible { outline:3px solid #ffb9ab; outline-offset:3px; }
-  .nav-dl { background:var(--accent); color:#fff !important; border-radius:999px; padding:7px 14px; font-size:13.5px; font-weight:700 !important; }
-  .nav-dl:hover { opacity:.9; }
+  .nav-dl { background:var(--accent); color:#fff !important; border-radius:999px; padding:7px 14px; font-size:13.5px; font-weight:700 !important; display:inline-block; transition:transform .12s, opacity .12s; }
   .gp { display:inline-flex; align-items:center; gap:11px; background:#000; color:#fff; text-decoration:none; border:1px solid var(--line); border-radius:11px; padding:10px 18px 10px 15px; transition:transform .15s, border-color .15s; }
-  .gp:hover { transform:translateY(-1px); border-color:#4a525d; }
+  @media (hover:hover) { .gp:hover { transform:translateY(-1px); border-color:#4a525d; } }
   .gp:focus-visible { outline:3px solid #ffb9ab; outline-offset:3px; }
   .gp-ico { width:24px; height:26px; display:block; flex-shrink:0; }
   .gp-txt { display:flex; flex-direction:column; line-height:1.12; text-align:left; }
