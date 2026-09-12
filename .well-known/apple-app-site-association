@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["N7RXW7R379.com.despega.app"],
+        "appID": "N7RXW7R379.com.despega.app",
+        "paths": ["/plaid-oauth", "/plaid-oauth/*"],
+        "components": [
+          { "/": "/plaid-oauth", "comment": "Retorno del OAuth de Plaid: iOS abre la app de Despega en vez de esta web" },
+          { "/": "/plaid-oauth/*" }
+        ]
+      }
+    ]
+  }
+}
