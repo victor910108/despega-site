@@ -28,7 +28,27 @@ services:
       - type: rewrite
         source: /delete-account
         destination: /delete-account.html
+    # Cabeceras de seguridad. Sin ellas un usuario desconfiado (o un escaner)
+    # ve un sitio de credito sin HSTS ni CSP. La CSP admite script y estilo en
+    # linea porque las paginas los llevan asi (sitio estatico, sin nonce);
+    # todo lo demas queda cerrado: sin marcos, sin objetos, sin conexiones
+    # fuera del propio dominio.
     headers:
       - path: /*
         name: X-Frame-Options
         value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Strict-Transport-Security
+        value: max-age=31536000; includeSubDomains
+      - path: /*
+        name: Content-Security-Policy
+        value: "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: Permissions-Policy
+        value: camera=(), microphone=(), geolocation=(), payment=()
