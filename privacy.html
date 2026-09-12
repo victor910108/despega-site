@@ -85,6 +85,7 @@
 <h2>6. Security</h2>
 <p>Data travels encrypted (HTTPS/TLS). The access tokens to your bank are stored encrypted with AES-256-GCM, and the whole database is encrypted at rest by the provider that hosts it. Your bank credentials never pass through our servers.</p>
 <p>You can protect your account with a PIN or biometrics on your phone and with two-step verification when signing in from a new device.</p>
+<p>What we do not have yet: an external audit (SOC 2) or an independent penetration test. What we do have: Plaid reviewed our application and approved us to operate in its production environment, we scan the code with security tools on every change, and we will publish here every audit we obtain. How to report a security issue: <a href="https://despegacredito.com/security" rel="noopener">https://despegacredito.com/security</a></p>
 <p>No system is infallible; if we detect a breach that affects you, we will notify you.</p>
 <h2>7. Minors</h2>
 <p>The app is not directed at people under 18 and we do not knowingly collect data from minors.</p>
@@ -94,7 +95,7 @@
 <h2>Change history</h2>
 <p>1.0, August 27, 2026: first version.</p>
 <p>1.1, September 11, 2026: every third party named (Apple, Google, Expo, RevenueCat and Sentry in addition to Plaid, Render, Supabase and Resend), notification and subscription data, support messages, encryption named, two-step verification, Plaid spending category, ninety-day error reports and what Plaid keeps after you delete your account.</p>
-<p>1.2, September 12, 2026: daily backups kept seven days (it used to say up to thirty), why we ask for bank accounts and not only cards, and this section.</p>
+<p>1.2, September 12, 2026: daily backups kept seven days (it used to say up to thirty), why we ask for bank accounts and not only cards, what we do not have yet in security (audit, penetration test) and how to report an issue, and this section.</p>
 </section>
 <section data-doc="es" lang="es" hidden>
 <h1>Política de privacidad</h1>
@@ -134,6 +135,7 @@
 <h2>6. Seguridad</h2>
 <p>Los datos viajan cifrados (HTTPS/TLS). Los tokens de acceso a tu banco se guardan cifrados con AES-256-GCM, y la base de datos entera está cifrada en reposo por el proveedor que la aloja. Tus credenciales bancarias nunca pasan por nuestros servidores.</p>
 <p>Puedes proteger tu cuenta con PIN o biometría en el teléfono y con verificación en dos pasos al iniciar sesión desde un dispositivo nuevo.</p>
+<p>Lo que aún no tenemos: una auditoría externa (SOC 2) ni una prueba de intrusión independiente. Lo que sí: Plaid revisó nuestra aplicación y nos aprobó para operar en su entorno de producción, analizamos el código con herramientas de seguridad en cada cambio, y publicaremos aquí cada auditoría que consigamos. Cómo avisarnos de un fallo de seguridad: <a href="https://despegacredito.com/security" rel="noopener">https://despegacredito.com/security</a></p>
 <p>Ningún sistema es infalible; si detectamos una brecha que te afecte, te avisaremos.</p>
 <h2>7. Menores</h2>
 <p>La app no está dirigida a menores de 18 años y no recogemos a sabiendas datos de menores.</p>
@@ -143,17 +145,17 @@
 <h2>Historial de cambios</h2>
 <p>1.0, 27 de agosto de 2026: primera versión.</p>
 <p>1.1, 11 de septiembre de 2026: todos los terceros con nombre (Apple, Google, Expo, RevenueCat y Sentry además de Plaid, Render, Supabase y Resend), datos de avisos y de suscripción, mensajes de soporte, cifrado con nombre, verificación en dos pasos, categoría de gasto de Plaid, informes de error de noventa días y lo que Plaid conserva tras borrar la cuenta.</p>
-<p>1.2, 12 de septiembre de 2026: copias de seguridad diarias de siete días (antes decía hasta treinta), por qué pedimos cuentas de banco y no solo tarjetas, y esta sección.</p>
+<p>1.2, 12 de septiembre de 2026: copias de seguridad diarias de siete días (antes decía hasta treinta), por qué pedimos cuentas de banco y no solo tarjetas, lo que aún no tenemos en seguridad (auditoría, prueba de intrusión) y cómo avisarnos de un fallo, y esta sección.</p>
 </section>
 </div></main>
 
-<footer><div class="wrap">© 2026 VMMV Partners LLC, doing business as Despega · <a href="/privacy" data-t="privacyLong">Privacy Policy</a> · <a href="/terms" data-t="termsLong">Terms of Service</a> · <a href="/delete-account" data-t="delete">Delete account</a></div></footer>
+<footer><div class="wrap">© 2026 VMMV Partners LLC, doing business as Despega · <a href="/privacy" data-t="privacyLong">Privacy Policy</a> · <a href="/terms" data-t="termsLong">Terms of Service</a> · <a href="/security" data-t="security">Security</a> · <a href="/delete-account" data-t="delete">Delete account</a></div></footer>
 
 <script>
 (function () {
   var T = {
-    es: { privacy: 'Privacidad', terms: 'Términos', privacyLong: 'Política de privacidad', termsLong: 'Términos de servicio', delete: 'Eliminar cuenta' },
-    en: { privacy: 'Privacy', terms: 'Terms', privacyLong: 'Privacy Policy', termsLong: 'Terms of Service', delete: 'Delete account' }
+    es: { privacy: 'Privacidad', terms: 'Términos', privacyLong: 'Política de privacidad', termsLong: 'Términos de servicio', security: 'Seguridad', delete: 'Eliminar cuenta' },
+    en: { privacy: 'Privacy', terms: 'Terms', privacyLong: 'Privacy Policy', termsLong: 'Terms of Service', security: 'Security', delete: 'Delete account' }
   };
   function apply(lang) {
     if (lang !== 'es') lang = 'en';

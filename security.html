@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security · Seguridad — Despega</title>
+<meta name="description" content="How Despega protects your data, what we do not have yet, and how to report a security issue. Cómo protege Despega tus datos y cómo avisarnos de un fallo.">
+<link rel="canonical" href="https://despegacredito.com/security">
+<link rel="icon" href="/favicon-48.png" sizes="48x48">
+<!-- Página escrita a mano (no la genera legal-a-html.ts). Mismo estilo y mismo
+     selector de idioma que /terms y /privacy. Si cambia lo que hacemos en
+     seguridad, cambiar aquí Y en la Privacidad, sección 6. -->
+<style>
+  :root { --ink:#1a1a1a; --muted:#595959; --accent:#ff6b54; --bg:#fff; --line:#e6e6e6; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+  header { border-bottom:1px solid var(--line); }
+  .wrap { max-width:760px; margin:0 auto; padding:0 20px; }
+  header .wrap { display:flex; align-items:center; gap:12px; height:60px; }
+  .logo { width:32px; height:32px; border-radius:9px; background:linear-gradient(135deg,#ff9a5c,#ff6b54); display:grid; place-items:center; color:#fff; font-weight:800; }
+  header a { color:var(--ink); text-decoration:none; font-weight:700; }
+  nav { margin-left:auto; display:flex; align-items:center; gap:16px; }
+  nav a { font-weight:500; color:var(--muted); }
+  .lang { display:flex; gap:4px; margin-left:8px; }
+  .lang button { border:1px solid var(--line); background:#fff; color:var(--muted); font:inherit; font-size:13px; font-weight:700; padding:4px 9px; border-radius:8px; cursor:pointer; }
+  .lang button[aria-pressed="true"] { border-color:var(--accent); color:var(--accent); }
+  main { padding:40px 0 80px; }
+  h1 { font-size:30px; margin:0 0 4px; }
+  .updated { color:var(--muted); margin:0 0 32px; }
+  h2 { font-size:19px; margin:36px 0 10px; }
+  p, li { color:var(--muted); }
+  ul { padding-left:22px; }
+  strong { color:var(--ink); }
+  a { color:#2447d6; }
+  code { background:#f4f4f4; padding:2px 6px; border-radius:6px; font-size:14px; color:var(--ink); }
+  [hidden] { display:none !important; }
+  footer { border-top:1px solid var(--line); padding:20px 0; color:var(--muted); font-size:14px; }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <a href="/" style="display:flex;align-items:center;gap:10px"><span class="logo">D</span>Despega</a>
+  <nav>
+    <a href="/privacy" data-t="privacy">Privacy</a><a href="/terms" data-t="terms">Terms</a>
+    <span class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="es" aria-pressed="false">ES</button>
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+    </span>
+  </nav>
+</div></header>
+
+<main><div class="wrap">
+
+<section data-doc="en" lang="en">
+<h1>Security</h1>
+<p class="updated">Last updated September 12, 2026</p>
+<p>This page says plainly what we do to protect your data, what we do not have yet, and how to tell us if you find a problem. It is written for people who are about to connect a bank to an app they have never heard of.</p>
+
+<h2>What we do</h2>
+<ul>
+  <li><strong>Your bank credentials never reach us.</strong> You enter them in Plaid; we receive an access token, and that token is stored encrypted with AES-256-GCM. Plaid reviewed our application and approved us to operate in its production environment.</li>
+  <li><strong>Read only.</strong> Despega never moves money, never contacts your creditors and never receives, holds or transmits funds.</li>
+  <li><strong>Encrypted in transit and at rest.</strong> All traffic goes over HTTPS/TLS; the database is encrypted at rest by the provider that hosts it (Supabase, Oregon, United States).</li>
+  <li><strong>Your account, locked.</strong> PIN or biometrics on the phone, two-step verification when signing in from a new device, and the app hides its content when it goes to the background.</li>
+  <li><strong>One administrator.</strong> Administrative access is limited to a single account fixed in the code; a database row alone cannot grant it.</li>
+  <li><strong>Every change is scanned.</strong> Static security analysis of the code and a review of dependencies on every change; the API documentation is not exposed in production.</li>
+  <li><strong>No advertising, no trackers.</strong> We do not sell your data and we do not use advertising networks or third-party tracking tools.</li>
+  <li><strong>Deletion is immediate.</strong> Deleting your account revokes access at Plaid first and then removes everything of yours in cascade. See <a href="/delete-account">Delete account</a>.</li>
+</ul>
+
+<h2>What we do not have yet</h2>
+<ul>
+  <li>An external audit (SOC 2).</li>
+  <li>An independent penetration test.</li>
+</ul>
+<p>We will publish here every audit or test we obtain, with its date and who performed it.</p>
+
+<h2>Report a security issue</h2>
+<p>Write to <a href="mailto:support@despegacredito.com">support@despegacredito.com</a> with the subject "Security". Please give us time to fix the problem before making it public; we will reply within five business days and tell you what we did. Our <a href="/.well-known/security.txt">security.txt</a> carries the same contact.</p>
+</section>
+
+<section data-doc="es" lang="es" hidden>
+<h1>Seguridad</h1>
+<p class="updated">Actualizado el 12 de septiembre de 2026</p>
+<p>Esta página dice sin rodeos qué hacemos para proteger tus datos, qué no tenemos todavía y cómo avisarnos si encuentras un fallo. Está escrita para quien va a conectar su banco a una app de la que nunca había oído hablar.</p>
+
+<h2>Qué hacemos</h2>
+<ul>
+  <li><strong>Tus credenciales del banco nunca llegan a nosotros.</strong> Las introduces en Plaid; nosotros recibimos un token de acceso, y ese token se guarda cifrado con AES-256-GCM. Plaid revisó nuestra aplicación y nos aprobó para operar en su entorno de producción.</li>
+  <li><strong>Solo lectura.</strong> Despega nunca mueve dinero, nunca contacta con tus acreedores y nunca recibe, retiene ni transmite fondos.</li>
+  <li><strong>Cifrado en tránsito y en reposo.</strong> Todo el tráfico va por HTTPS/TLS; la base de datos está cifrada en reposo por el proveedor que la aloja (Supabase, Oregón, Estados Unidos).</li>
+  <li><strong>Tu cuenta, con llave.</strong> PIN o biometría en el teléfono, verificación en dos pasos al entrar desde un dispositivo nuevo, y la app tapa su contenido cuando pasa a segundo plano.</li>
+  <li><strong>Un solo administrador.</strong> El acceso administrativo está limitado a una única cuenta fijada en el código; una fila de la base de datos por sí sola no lo concede.</li>
+  <li><strong>Cada cambio se analiza.</strong> Análisis estático de seguridad del código y revisión de dependencias en cada cambio; la documentación de la API no está expuesta en producción.</li>
+  <li><strong>Sin publicidad ni rastreadores.</strong> No vendemos tus datos ni usamos redes publicitarias ni herramientas de seguimiento de terceros.</li>
+  <li><strong>El borrado es inmediato.</strong> Borrar tu cuenta revoca primero el acceso en Plaid y después elimina en cascada todo lo tuyo. Ver <a href="/delete-account">Eliminar cuenta</a>.</li>
+</ul>
+
+<h2>Qué no tenemos todavía</h2>
+<ul>
+  <li>Una auditoría externa (SOC 2).</li>
+  <li>Una prueba de intrusión independiente.</li>
+</ul>
+<p>Publicaremos aquí cada auditoría o prueba que consigamos, con su fecha y quién la hizo.</p>
+
+<h2>Avisar de un fallo de seguridad</h2>
+<p>Escribe a <a href="mailto:support@despegacredito.com">support@despegacredito.com</a> con el asunto "Seguridad". Danos tiempo para corregirlo antes de hacerlo público; te responderemos en cinco días laborables y te diremos qué hicimos. Nuestro <a href="/.well-known/security.txt">security.txt</a> lleva el mismo contacto.</p>
+</section>
+
+</div></main>
+
+<footer><div class="wrap">© 2026 VMMV Partners LLC, doing business as Despega · <a href="/privacy" data-t="privacyLong">Privacy Policy</a> · <a href="/terms" data-t="termsLong">Terms of Service</a> · <a href="/security" data-t="security">Security</a> · <a href="/delete-account" data-t="delete">Delete account</a></div></footer>
+
+<script>
+(function () {
+  var T = {
+    es: { privacy: 'Privacidad', terms: 'Términos', privacyLong: 'Política de privacidad', termsLong: 'Términos de servicio', security: 'Seguridad', delete: 'Eliminar cuenta' },
+    en: { privacy: 'Privacy', terms: 'Terms', privacyLong: 'Privacy Policy', termsLong: 'Terms of Service', security: 'Security', delete: 'Delete account' }
+  };
+  function apply(lang) {
+    if (lang !== 'es') lang = 'en';
+    var docs = document.querySelectorAll('[data-doc]');
+    for (var i = 0; i < docs.length; i++) docs[i].hidden = docs[i].getAttribute('data-doc') !== lang;
+    var ts = document.querySelectorAll('[data-t]');
+    for (var j = 0; j < ts.length; j++) ts[j].textContent = T[lang][ts[j].getAttribute('data-t')];
+    var btns = document.querySelectorAll('[data-lang]');
+    for (var k = 0; k < btns.length; k++) btns[k].setAttribute('aria-pressed', btns[k].getAttribute('data-lang') === lang ? 'true' : 'false');
+    document.documentElement.lang = lang;
+  }
+  var lang = null;
+  try { lang = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+  if (!lang) { try { lang = localStorage.getItem('lang'); } catch (e) {} }
+  apply(lang || 'en');
+  var btns = document.querySelectorAll('[data-lang]');
+  for (var k = 0; k < btns.length; k++) {
+    btns[k].addEventListener('click', function () {
+      var l = this.getAttribute('data-lang');
+      try { localStorage.setItem('lang', l); } catch (e) {}
+      apply(l);
+    });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+Contact: mailto:support@despegacredito.com
+Expires: 2027-09-12T00:00:00.000Z
+Preferred-Languages: es, en
+Canonical: https://despegacredito.com/.well-known/security.txt
+Policy: https://despegacredito.com/security

@@ -28,6 +28,14 @@ services:
       - type: rewrite
         source: /delete-account
         destination: /delete-account.html
+      # Que hacemos en seguridad, que no tenemos y como avisar de un fallo.
+      - type: rewrite
+        source: /security
+        destination: /security.html
+      # RFC 9116: donde miran los investigadores de seguridad a quien avisar.
+      - type: rewrite
+        source: /.well-known/security.txt
+        destination: /security.txt
     # Cabeceras de seguridad. Sin ellas un usuario desconfiado (o un escaner)
     # ve un sitio de credito sin HSTS ni CSP. La CSP admite script y estilo en
     # linea porque las paginas los llevan asi (sitio estatico, sin nonce);
