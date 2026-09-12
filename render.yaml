@@ -36,6 +36,10 @@ services:
       - type: rewrite
         source: /.well-known/security.txt
         destination: /security.txt
+      # Retorno del OAuth de Plaid en iPhone (redirect_uri registrado en Plaid).
+      - type: rewrite
+        source: /plaid-oauth
+        destination: /plaid-oauth.html
     # Cabeceras de seguridad. Sin ellas un usuario desconfiado (o un escaner)
     # ve un sitio de credito sin HSTS ni CSP. La CSP admite script y estilo en
     # linea porque las paginas los llevan asi (sitio estatico, sin nonce);
@@ -60,3 +64,7 @@ services:
       - path: /*
         name: Permissions-Policy
         value: camera=(), microphone=(), geolocation=(), payment=()
+      # Apple exige este tipo para el archivo de dominios asociados (sin extension).
+      - path: /.well-known/apple-app-site-association
+        name: Content-Type
+        value: application/json
