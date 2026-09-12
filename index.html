@@ -304,7 +304,9 @@
 <script>
 (function () {
   // Textos de la portada en los dos idiomas. Los legales (/privacy, /terms)
-  // están en inglés: es lo que leen los revisores y lo que exige Plaid.
+  // se GENERAN desde packages/shared/src/legal del repo PayCard, en los dos
+  // idiomas (inglés por defecto para los revisores y Plaid), y comparten
+  // este mismo localStorage('lang').
   // Los pasos 1-3 usan las MISMAS frases del carrusel de bienvenida de la app.
   var T = {
     es: {

@@ -3,9 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Terms of Service — Despega</title>
-<meta name="description" content="Terms of Service for the Despega mobile app by VMMV Partners LLC.">
+<title>Terms of Service · Términos de servicio — Despega</title>
+<meta name="description" content="Terms of Service for the Despega mobile app by VMMV Partners LLC. Términos de servicio de la app Despega.">
 <link rel="canonical" href="https://despegacredito.com/terms">
+<link rel="icon" href="/favicon-48.png" sizes="48x48">
+<!-- GENERADO desde packages/shared/src/legal/index.ts (repo PayCard) con
+     scripts/legal-a-html.ts. No editar a mano: el cambio se pierde al regenerar. -->
 <style>
   :root { --ink:#1a1a1a; --muted:#595959; --accent:#ff6b54; --bg:#fff; --line:#e6e6e6; }
   * { box-sizing:border-box; }
@@ -15,35 +18,39 @@
   header .wrap { display:flex; align-items:center; gap:12px; height:60px; }
   .logo { width:32px; height:32px; border-radius:9px; background:linear-gradient(135deg,#ff9a5c,#ff6b54); display:grid; place-items:center; color:#fff; font-weight:800; }
   header a { color:var(--ink); text-decoration:none; font-weight:700; }
-  nav a { margin-left:16px; font-weight:500; color:var(--muted); }
+  nav { margin-left:auto; display:flex; align-items:center; gap:16px; }
+  nav a { font-weight:500; color:var(--muted); }
+  .lang { display:flex; gap:4px; margin-left:8px; }
+  .lang button { border:1px solid var(--line); background:#fff; color:var(--muted); font:inherit; font-size:13px; font-weight:700; padding:4px 9px; border-radius:8px; cursor:pointer; }
+  .lang button[aria-pressed="true"] { border-color:var(--accent); color:var(--accent); }
   main { padding:40px 0 80px; }
   h1 { font-size:30px; margin:0 0 4px; }
   .updated { color:var(--muted); margin:0 0 32px; }
   h2 { font-size:19px; margin:36px 0 10px; }
-  h3 { font-size:16px; margin:22px 0 6px; }
-  p, li { color:var(--muted); }
+  p { color:var(--muted); }
   strong { color:var(--ink); }
-  ul { padding-left:22px; }
-  table { border-collapse:collapse; width:100%; margin:12px 0; font-size:14px; }
-  th, td { border:1px solid var(--line); padding:8px 10px; vertical-align:top; text-align:left; }
-  th { background:#fafafa; color:var(--ink); }
   a { color:#2447d6; }
-  .toc { background:#fafafa; border:1px solid var(--line); border-radius:12px; padding:16px 20px; }
-  .toc ol { margin:0; padding-left:20px; }
-  .toc li { margin:4px 0; }
+  [hidden] { display:none !important; }
   footer { border-top:1px solid var(--line); padding:20px 0; color:var(--muted); font-size:14px; }
 </style>
 </head>
 <body>
 <header><div class="wrap">
   <a href="/" style="display:flex;align-items:center;gap:10px"><span class="logo">D</span>Despega</a>
-  <nav style="margin-left:auto"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav>
+  <nav>
+    <a href="/privacy" data-t="privacy">Privacy</a><a href="/terms" data-t="terms">Terms</a>
+    <span class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="es" aria-pressed="false">ES</button>
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+    </span>
+  </nav>
 </div></header>
 
 <main><div class="wrap">
+<section data-doc="en" lang="en">
 <h1>Terms of Service</h1>
-<p class="updated">Version 1.0 · Last updated August 27, 2026</p>
-
+<p class="updated">Version 1.1 · Last updated September 11, 2026</p>
+<p>These terms govern your use of the Despega app. By creating an account or using the app you agree to them. If you do not agree, do not use the app.</p>
 <h2>1. What Despega is</h2>
 <p>Despega is a tool to see your cards, organize your payments and understand your credit. It connects to your banks through Plaid, a third-party provider, to read your accounts and transactions.</p>
 <p>Despega is not a bank, does not lend money, does not move money between your accounts and does not provide financial, legal or tax advice. The information it shows is for guidance only.</p>
@@ -59,19 +66,104 @@
 <p>Despega helps you organize your payments: it shows due dates, amounts and reminders, and calculates payoff plans. But you make the payment, at your bank. Despega does not pay your cards, does not move money and cannot guarantee that a payment is made.</p>
 <p>You are responsible for paying your cards and debts on time and for the correct amount. Despega is not liable for late fees, interest, charges, lost promotional terms or any effect on your credit history or score resulting from a payment that was not made, was made late or was made for a different amount than owed, whatever the cause.</p>
 <p>Reminders are an aid, not a guarantee. They may not arrive, or arrive late, if notifications are disabled, the device is off or offline, or for reasons outside Despega's control. Dates and amounts come from your bank through Plaid and may be estimates when the bank does not share them; the app indicates when that is the case. Always confirm the date and amount with your bank before paying.</p>
-<h2>6. Limitation of liability</h2>
+<h2>6. Subscription, price and cancellation</h2>
+<p>When you create your account you get a seven-day free trial with every feature. When it ends, continuing to use Despega requires the Premium subscription.</p>
+<p>The Premium subscription costs 5.99 US dollars per month. There is also a discounted yearly plan; its price is shown in the store before you confirm. The exact price in your country, taxes included, is the one the App Store or Google Play shows you at the time of purchase.</p>
+<p>The store (Apple or Google) charges you using the payment method of your account with it. Despega never receives your card number.</p>
+<p>The subscription renews automatically at the end of each period, monthly or yearly, at the same price, unless you cancel it at least twenty-four hours before the current period ends.</p>
+<p>You can cancel at any time from the subscription settings of your Apple or Google account. Deleting the app or deleting your Despega account does not cancel the subscription: cancel it in the store. When you cancel you keep Premium until the end of the period you already paid for.</p>
+<p>Refunds are handled by the store under its own rules; you request them from your Apple or Google account. If you have a problem with a charge, write to <a href="mailto:support@despegacredito.com">support@despegacredito.com</a> and we will help you sort it out.</p>
+<p>If we raise the price we will tell you in advance and, where the store requires it, you will have to accept it; if you do not, the subscription does not renew.</p>
+<h2>7. Limitation of liability</h2>
 <p>The information you see in Despega is for guidance only. It is not financial, legal or tax advice, and it does not replace what your bank or a professional tells you.</p>
 <p>Your account data comes from your bank through Plaid. It may arrive incomplete, delayed or with errors, and some amounts are estimates when the bank does not share them. Despega is not liable for those errors nor for the decisions you make based on them.</p>
 <p>The service is provided as is. We do not guarantee that it will always be available or free of faults.</p>
 <p>To the extent permitted by applicable law, Despega and VMMV Partners LLC are not liable for indirect, incidental or consequential damages, including lost profits, lost opportunities, late fees, interest, or harm to your credit history or score.</p>
 <p>Also to the extent permitted by law, our total liability for any claim related to the app is limited to the greater of these two amounts: what you have paid for the service in the previous twelve months, or one hundred US dollars.</p>
 <p>Some states and countries do not allow certain warranties to be excluded or liability to be limited. If that is your case, those exclusions do not apply to you and you keep the rights the law gives you.</p>
-<h2>7. Changes to these terms</h2>
+<h2>8. Governing law and claims</h2>
+<p>These terms are governed by the laws of the State of Florida, United States. If you live in another state or country, you keep the rights that the law of your place of residence gives you and that cannot be waived.</p>
+<p>If you have a claim, write to <a href="mailto:support@despegacredito.com">support@despegacredito.com</a> first: we will try to resolve it with you within thirty days. If we cannot, both parties submit to the courts of Broward County, Florida, unless the law of your place of residence lets you go to your own.</p>
+<h2>9. Changes to these terms</h2>
 <p>We may update these terms. If a change is material we will notify you in the app and ask you to accept them again before continuing to use it.</p>
-<h2>8. Contact</h2>
-<p>For any question about these terms write to support@despegacredito.com.</p>
+<h2>10. Contact</h2>
+<p>For any question about these terms write to <a href="mailto:support@despegacredito.com">support@despegacredito.com</a>. VMMV Partners LLC, 174 Wimbledon Lake Dr Apt 174, Plantation, FL 33324, United States.</p>
+</section>
+<section data-doc="es" lang="es" hidden>
+<h1>Términos de servicio</h1>
+<p class="updated">Versión 1.1 · Actualizado el 11 de septiembre de 2026</p>
+<p>Estos términos regulan el uso de la aplicación Despega. Al crear una cuenta o usar la app aceptas estos términos. Si no estás de acuerdo, no uses la app.</p>
+<h2>1. Qué es Despega</h2>
+<p>Despega es una herramienta para ver tus tarjetas, organizar tus pagos y entender tu crédito. Conecta con tus bancos a través de Plaid, un proveedor externo, para leer tus cuentas y movimientos.</p>
+<p>Despega no es un banco, no presta dinero, no mueve dinero entre tus cuentas y no ofrece asesoría financiera, legal ni fiscal. La información que muestra es orientativa.</p>
+<h2>2. Tu cuenta</h2>
+<p>Debes tener al menos 18 años y facilitar datos veraces. Eres responsable de mantener en secreto tu contraseña y tu PIN, y de todo lo que se haga con tu cuenta.</p>
+<p>Puedes borrar tu cuenta en cualquier momento desde Perfil → Seguridad. Al hacerlo se eliminan tus datos según la Política de privacidad.</p>
+<h2>3. Conexión con tus bancos</h2>
+<p>Al conectar un banco autorizas a Plaid a acceder a tus datos bancarios en tu nombre y a compartirlos con Despega. El uso que Plaid hace de tus datos se rige por su propia política de privacidad.</p>
+<p>Puedes desconectar un banco cuando quieras desde la app. Al hacerlo se eliminan de Despega las cuentas, tarjetas, transacciones y pagos automáticos de ese banco, y se revoca el acceso concedido a Plaid. Esta acción no se puede deshacer; si vuelves a conectar el banco, sus datos se descargan de nuevo.</p>
+<h2>4. Uso aceptable</h2>
+<p>No puedes usar la app para actividades ilegales, intentar acceder a cuentas ajenas, interferir con el servicio ni extraer datos de forma automatizada.</p>
+<h2>5. Tus pagos son tu responsabilidad</h2>
+<p>Despega te ayuda a organizar tus pagos: muestra fechas de vencimiento, importes y avisos, y calcula planes de pago. Pero el pago lo haces tú, en tu banco. Despega no paga tus tarjetas, no mueve dinero y no puede garantizar que un pago se realice.</p>
+<p>Eres responsable de pagar tus tarjetas y deudas a tiempo y por el importe correcto. Despega no responde de recargos, intereses, comisiones, pérdida de promociones ni de efectos en tu historial o puntaje de crédito derivados de un pago que no se hizo, se hizo tarde o por un importe distinto al debido, sea cual sea la causa.</p>
+<p>Los avisos son una ayuda, no una garantía. Pueden no llegar o llegar tarde si las notificaciones están desactivadas, el dispositivo está apagado o sin conexión, o por causas ajenas a Despega. Las fechas e importes proceden de tu banco a través de Plaid y pueden ser estimados cuando el banco no los comparte; la app lo indica cuando es así. Confirma siempre la fecha y el importe en tu banco antes de pagar.</p>
+<h2>6. Suscripción, precio y cancelación</h2>
+<p>Al crear la cuenta tienes una prueba gratuita de siete días con todas las funciones. Al terminar, seguir usando Despega requiere la suscripción Premium.</p>
+<p>La suscripción Premium cuesta 5.99 dólares estadounidenses al mes. También hay un plan anual con descuento; su precio se muestra en la tienda antes de confirmar. El precio exacto en tu país, impuestos incluidos, es el que te enseña la App Store o Google Play en el momento de comprar.</p>
+<p>El cobro lo hace la tienda (Apple o Google) con el medio de pago de tu cuenta en ella. Despega nunca recibe tu número de tarjeta.</p>
+<p>La suscripción se renueva sola al final de cada periodo, mensual o anual, al mismo precio, salvo que la canceles al menos veinticuatro horas antes de que termine el periodo en curso.</p>
+<p>Puedes cancelar cuando quieras desde los ajustes de suscripciones de tu cuenta de Apple o de Google. Borrar la app o borrar tu cuenta de Despega no cancela la suscripción: cancélala en la tienda. Al cancelar conservas Premium hasta el final del periodo ya pagado.</p>
+<p>Los reembolsos los gestiona la tienda según sus propias normas; se piden desde tu cuenta de Apple o de Google. Si tienes un problema con un cobro, escríbenos a <a href="mailto:support@despegacredito.com">support@despegacredito.com</a> y te ayudaremos a tramitarlo.</p>
+<p>Si subimos el precio te lo avisaremos con antelación y, cuando la tienda lo exija, tendrás que aceptarlo; si no lo aceptas, la suscripción no se renueva.</p>
+<h2>7. Limitación de responsabilidad</h2>
+<p>La información que ves en Despega es orientativa. No es asesoramiento financiero, legal ni fiscal, y no sustituye lo que te diga tu banco o un profesional.</p>
+<p>Los datos de tus cuentas nos los facilita tu banco a través de Plaid. Pueden llegar incompletos, con retraso o con errores, y algunos importes son estimaciones cuando el banco no los comparte. Despega no responde de esos errores ni de las decisiones que tomes basándote en ellos.</p>
+<p>El servicio se ofrece tal cual. No garantizamos que esté siempre disponible ni libre de fallos.</p>
+<p>En la medida en que lo permita la ley aplicable, Despega y VMMV Partners LLC no responden de daños indirectos, incidentales o derivados: entre otros, lucro cesante, pérdida de oportunidades, recargos, intereses o perjuicios a tu historial o puntaje de crédito.</p>
+<p>También en la medida en que lo permita la ley, nuestra responsabilidad total por cualquier reclamación relacionada con la app se limita a la mayor de estas dos cantidades: lo que hayas pagado por el servicio en los doce meses anteriores, o cien dólares estadounidenses.</p>
+<p>Algunos estados y países no permiten excluir ciertas garantías ni limitar la responsabilidad. Si es tu caso, esas exclusiones no se te aplican y conservas los derechos que la ley te reconozca.</p>
+<h2>8. Ley aplicable y reclamaciones</h2>
+<p>Estos términos se rigen por las leyes del estado de Florida, Estados Unidos. Si resides en otro estado o país, conservas los derechos que la ley de tu lugar de residencia te reconozca y a los que no se pueda renunciar.</p>
+<p>Si tienes una reclamación, escríbenos primero a <a href="mailto:support@despegacredito.com">support@despegacredito.com</a>: intentaremos resolverla contigo en un plazo de treinta días. Si no lo conseguimos, las dos partes se someten a los tribunales de Broward County, Florida, salvo que la ley de tu lugar de residencia te permita acudir a los tuyos.</p>
+<h2>9. Cambios en estos términos</h2>
+<p>Podemos actualizar estos términos. Si el cambio es relevante te lo avisaremos en la app y te pediremos que los aceptes de nuevo antes de seguir usándola.</p>
+<h2>10. Contacto</h2>
+<p>Para cualquier duda sobre estos términos escríbenos a <a href="mailto:support@despegacredito.com">support@despegacredito.com</a>. VMMV Partners LLC, 174 Wimbledon Lake Dr Apt 174, Plantation, FL 33324, Estados Unidos.</p>
+</section>
 </div></main>
 
-<footer><div class="wrap">© 2026 VMMV Partners LLC, doing business as Despega · <a href="/privacy">Privacy Policy</a> · <a href="/terms">Terms of Service</a></div></footer>
+<footer><div class="wrap">© 2026 VMMV Partners LLC, doing business as Despega · <a href="/privacy" data-t="privacyLong">Privacy Policy</a> · <a href="/terms" data-t="termsLong">Terms of Service</a></div></footer>
+
+<script>
+(function () {
+  var T = {
+    es: { privacy: 'Privacidad', terms: 'Términos', privacyLong: 'Política de privacidad', termsLong: 'Términos de servicio' },
+    en: { privacy: 'Privacy', terms: 'Terms', privacyLong: 'Privacy Policy', termsLong: 'Terms of Service' }
+  };
+  function apply(lang) {
+    if (lang !== 'es') lang = 'en';
+    var docs = document.querySelectorAll('[data-doc]');
+    for (var i = 0; i < docs.length; i++) docs[i].hidden = docs[i].getAttribute('data-doc') !== lang;
+    var ts = document.querySelectorAll('[data-t]');
+    for (var j = 0; j < ts.length; j++) ts[j].textContent = T[lang][ts[j].getAttribute('data-t')];
+    var btns = document.querySelectorAll('[data-lang]');
+    for (var k = 0; k < btns.length; k++) btns[k].setAttribute('aria-pressed', btns[k].getAttribute('data-lang') === lang ? 'true' : 'false');
+    document.documentElement.lang = lang;
+  }
+  var lang = null;
+  try { lang = new URLSearchParams(location.search).get('lang'); } catch (e) {}
+  if (!lang) { try { lang = localStorage.getItem('lang'); } catch (e) {} }
+  apply(lang || 'en');
+  var btns = document.querySelectorAll('[data-lang]');
+  for (var k = 0; k < btns.length; k++) {
+    btns[k].addEventListener('click', function () {
+      var l = this.getAttribute('data-lang');
+      try { localStorage.setItem('lang', l); } catch (e) {}
+      apply(l);
+    });
+  }
+})();
+</script>
 </body>
 </html>
