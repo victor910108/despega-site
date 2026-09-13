@@ -40,6 +40,10 @@ services:
       - type: rewrite
         source: /plaid-oauth
         destination: /plaid-oauth.html
+      # A donde enlaza el correo de "olvide mi contrasena" (?token=): antes 404.
+      - type: rewrite
+        source: /reset-password
+        destination: /reset-password.html
     # Cabeceras de seguridad. Sin ellas un usuario desconfiado (o un escaner)
     # ve un sitio de credito sin HSTS ni CSP. La CSP admite script y estilo en
     # linea porque las paginas los llevan asi (sitio estatico, sin nonce);
